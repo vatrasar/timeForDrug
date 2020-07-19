@@ -9,6 +9,12 @@ public class Utils {
             return false;
     }
 
+    /**
+     * @param timeInterval
+     * @param currentTime
+     * @param lastDragTime
+     * @return remaning time in minutes
+     */
     public static long getRemaingTime(long timeInterval,long currentTime,long lastDragTime)
     {
         long remanigTime=timeInterval-(currentTime-lastDragTime);

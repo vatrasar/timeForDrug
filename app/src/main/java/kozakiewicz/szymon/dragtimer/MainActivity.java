@@ -7,8 +7,10 @@ import androidx.core.app.NotificationManagerCompat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         counter=0;
         setContentView(R.layout.activity_main);
         if(isDragTime())
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
            Button onDragTime=((Button)findViewById(R.id.btnTakeDrag));
            onDragTime.setEnabled(false);
+
 
 
         }
@@ -86,11 +90,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(this, SettingsActivity.class);
         startActivity(intent);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "l")
-                .setSmallIcon(R.drawable.notify_icon)
-                .setContentTitle("Pierwsza notyfikacja")
-                .setContentText("Weź lek kurde")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
     }
 
     public void onTakeDrag(View view) {
@@ -123,6 +123,10 @@ public class MainActivity extends AppCompatActivity {
         timerRunnable=new MyTime((TextView) findViewById(R.id.labTime),(TextView) findViewById(R.id.txtRemainigTime),timerHandler,lastTime,timeInterval,(Button)findViewById(R.id.btnTakeDrag));
         timerHandler.postDelayed(timerRunnable, 60000);
 
+        //set notify service
+        Intent intent = new Intent(this, AlarmService.class);
+        startService(intent);
+
 
 
     }
@@ -130,13 +134,7 @@ public class MainActivity extends AppCompatActivity {
     public void onReset(View view) {
         timerHandler.removeCallbacks(timerRunnable);
         setDragTimeLook();
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "l")
-//                .setSmallIcon(R.drawable.notify_icon)
-//                .setContentTitle("Pierwsza notyfikacja")
-//                .setContentText("Weź lek kurde")
-//                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-//        notificationManager.notify(1,builder.build());
+
     }
 }
 
