@@ -2,6 +2,8 @@ package kozakiewicz.szymon.dragtimer;
 
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,11 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         if(isDragTime())
         {
-            TextView labTime=(TextView) findViewById(R.id.labTime);
-            labTime.setText(R.string.timeForDrag);
-            labTime.setTextColor(Color.GREEN);
-            ((TextView) findViewById(R.id.txtRemainigTime)).setText("");
-            ((Button)findViewById(R.id.btnTakeDrag)).setEnabled(true);
+            setDragTimeLook();
         }
         else {
             //get data
@@ -64,6 +62,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void setDragTimeLook() {
+        TextView labTime=(TextView) findViewById(R.id.labTime);
+        labTime.setText(R.string.timeForDrag);
+        labTime.setTextColor(Color.GREEN);
+        ((TextView) findViewById(R.id.txtRemainigTime)).setText("");
+        ((Button)findViewById(R.id.btnTakeDrag)).setEnabled(true);
+    }
+
     private boolean isDragTime() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -79,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
     public void onSettings(View view) {
         Intent intent=new Intent(this, SettingsActivity.class);
         startActivity(intent);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "l")
+                .setSmallIcon(R.drawable.notify_icon)
+                .setContentTitle("Pierwsza notyfikacja")
+                .setContentText("Weź lek kurde")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
     }
 
     public void onTakeDrag(View view) {
@@ -101,16 +113,30 @@ public class MainActivity extends AppCompatActivity {
         //set Time in timeView
         ((TextView) findViewById(R.id.txtRemainigTime)).setText(R.string.remaining_time);
 
-        //set color:
-        ((TextView) findViewById(R.id.labTime)).setTextColor(Color.BLUE);
+        //set labRemaningtime:
+        TextView labRemainingTime=((TextView) findViewById(R.id.labTime));
+        labRemainingTime.setTextColor(Color.BLUE);
+        labRemainingTime.setText(timeInterval*60+"");
 
         //run thread
         timerHandler.removeCallbacks(timerRunnable);
         timerRunnable=new MyTime((TextView) findViewById(R.id.labTime),(TextView) findViewById(R.id.txtRemainigTime),timerHandler,lastTime,timeInterval,(Button)findViewById(R.id.btnTakeDrag));
-        timerHandler.postDelayed(timerRunnable, 1000);
+        timerHandler.postDelayed(timerRunnable, 60000);
 
 
 
+    }
+
+    public void onReset(View view) {
+        timerHandler.removeCallbacks(timerRunnable);
+        setDragTimeLook();
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "l")
+//                .setSmallIcon(R.drawable.notify_icon)
+//                .setContentTitle("Pierwsza notyfikacja")
+//                .setContentText("Weź lek kurde")
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+//        notificationManager.notify(1,builder.build());
     }
 }
 
@@ -152,7 +178,7 @@ class MyTime extends Thread
 
              labTime.setText(Utils.getRemaingTime(timeInterval,Calendar.getInstance().getTimeInMillis(),lastTime) + "");
 
-            timerHandler.postDelayed(this, 500);
+            timerHandler.postDelayed(this, 60000);
         }
     }
 }

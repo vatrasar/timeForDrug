@@ -12,6 +12,7 @@ public class Utils {
     public static long getRemaingTime(long timeInterval,long currentTime,long lastDragTime)
     {
         long remanigTime=timeInterval-(currentTime-lastDragTime);
-        return remanigTime/1000;
+        long result= remanigTime/(1000*60);
+        return result;
     }
 }
