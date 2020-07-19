@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Czas  na lek</string>
+    <string name="settings">Ustawienia</string>
+    <string name="take_drag">Weź lek</string>
+    <string name="remaining_time">Pozostały czas:</string>
+    <string name="hour">Wielkość interwału:</string>
+    <string name="save">Zapisz</string>
+    <string name="settingsPreferences">settingPreferences</string>
+    <string name="timeForDrag">Czas na lek!</string>
+
+</resources>
