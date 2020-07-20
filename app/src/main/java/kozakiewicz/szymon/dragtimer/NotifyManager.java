@@ -31,6 +31,10 @@ public class NotifyManager extends BroadcastReceiver {
         notificationManager.notify(1, builder.build());
         ToneGenerator toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
         toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP,150);
+
+        Intent intentService = new Intent();
+        intent.setClass(context, AlarmService.class);
+        context.stopService(intent);
     }
 
     public void setAlarm(Context context, long remaningTime)

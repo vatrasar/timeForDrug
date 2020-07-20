@@ -46,6 +46,8 @@ public class AlarmService extends Service
         return null;
     }
 
+
+
     long getRemaningTime()
     {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
