@@ -54,7 +54,7 @@ public class AlarmService extends Service
 
         int timeInterval=1;
         timeInterval=sharedPref.getInt("hoursNumber",timeInterval);
-        timeInterval=60*60*1000*timeInterval;
+
         long lastDragTime=1;
         lastDragTime=sharedPref.getLong("lastDragTime",lastDragTime);
         long currentTime= Calendar.getInstance().getTimeInMillis();

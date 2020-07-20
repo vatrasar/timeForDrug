@@ -49,6 +49,6 @@ public class NotifyManager extends BroadcastReceiver {
         AlarmManager am =( AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, NotifyManager.class);
         PendingIntent pi = PendingIntent.getBroadcast(context, 0, i, 0);
-        am.setExact(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis()+20*1000, pi); // Millisec * Second * Minute
+        am.setExact(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis()+remaningTime*60*1000, pi); // Millisec * Second * Minute
     }
 }
