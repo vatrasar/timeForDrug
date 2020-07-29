@@ -1,6 +1,12 @@
 package kozakiewicz.szymon.dragtimer;
 
 public class Utils {
+    /**
+     * @param timeInterval milisecounds
+     * @param currentTime milisecounds
+     * @param lastDragTime hours
+     * @return
+     */
     public static boolean isAfterTimeForDrag(long timeInterval,long currentTime,long lastDragTime)
     {
         timeInterval=60*60*1000*timeInterval;
@@ -11,9 +17,9 @@ public class Utils {
     }
 
     /**
-     * @param timeInterval
-     * @param currentTime
-     * @param lastDragTime
+     * @param timeInterval milisecounds
+     * @param currentTime milisecounds
+     * @param lastDragTime hours
      * @return remaning time in minutes
      */
     public static long getRemaingTime(long timeInterval,long currentTime,long lastDragTime)
