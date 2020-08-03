@@ -9,8 +9,9 @@
 
     <Button
         android:id="@+id/btnSettings"
-        android:layout_width="145dip"
+        android:layout_width="120dip"
         android:layout_height="46dip"
+        android:backgroundTint="#CDDC39"
         android:onClick="onSettings"
         android:text="@string/settings"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,8 +30,9 @@
 
     <Button
         android:id="@+id/btnReset"
-        android:layout_width="145dip"
+        android:layout_width="121dip"
         android:layout_height="46dip"
+        android:backgroundTint="#E91E63"
         android:onClick="onReset"
         android:text="@string/reset"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -75,5 +77,16 @@
             android:max="100" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnStac"
+        android:layout_width="121dip"
+        android:layout_height="46dip"
+        android:backgroundTint="#4EADD8"
+        android:onClick="onStac"
+        android:text="@string/statistic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnReset"
+        app:layout_constraintStart_toEndOf="@+id/btnSettings" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

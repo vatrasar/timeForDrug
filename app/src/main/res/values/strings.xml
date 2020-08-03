@@ -8,5 +8,6 @@
     <string name="settingsPreferences">settingPreferences</string>
     <string name="timeForDrag">Czas na lek!</string>
     <string name="reset">Reset</string>
+    <string name="statistic">Statystyki</string>
 
 </resources>

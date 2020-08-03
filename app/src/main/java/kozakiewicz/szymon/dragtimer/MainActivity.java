@@ -19,7 +19,12 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     int counter;
@@ -141,9 +146,25 @@ public class MainActivity extends AppCompatActivity {
         //set notify service
         Intent intent = new Intent(this, AlarmService.class);
         startService(intent);
-
         setProgrss(lastDragTime,timeInterval);
 
+
+        //update stac
+        //get day of week
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.US);
+        String currentDayOfTheWeek = sdf.format(Calendar.getInstance().getTime());
+        //checking should memmory  be reset
+        //get current day form memory
+        String currentDayFromMemmory=sharedPref.getString("currentDay","");
+        if(!currentDayFromMemmory.equals(currentDayOfTheWeek))
+        {
+            editor.putString("currentDay",currentDayOfTheWeek);
+            editor.putInt(currentDayOfTheWeek,0);
+        }
+        //update drugs number
+        int numberOfDrugsToday=sharedPref.getInt(currentDayOfTheWeek,0);
+        editor.putInt(currentDayOfTheWeek,numberOfDrugsToday+1);
+        editor.commit();
 
 
     }
@@ -154,6 +175,11 @@ public class MainActivity extends AppCompatActivity {
         ProgressBar progressBar=(ProgressBar) findViewById(R.id.timeProgressbar);
         progressBar.setVisibility(View.GONE);
 
+    }
+
+    public void onStac(View view) {
+        Intent intent=new Intent(this, StacActivity.class);
+        startActivity(intent);
     }
 }
 

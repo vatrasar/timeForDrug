@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kozakiewicz.szymon.dragtimer">
-    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/app_image"
@@ -9,8 +11,8 @@
         android:roundIcon="@mipmap/app_image_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".StacActivity"></activity>
+        <activity android:name=".SettingsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,17 +20,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".NotifyManager"
+
+        <receiver
+            android:name=".NotifyManager"
             android:permission="android.permission.WAKE_LOCK">
             <intent-filter>
-                <action android:name="android.intent.action.AIRPLANE_MODE"/>
+                <action android:name="android.intent.action.AIRPLANE_MODE" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".AlarmService"
             android:enabled="true"
-            android:process=":your_service" >
-        </service>
+            android:process=":your_service"></service>
     </application>
 
 </manifest>

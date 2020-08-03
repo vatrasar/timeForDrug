@@ -1,5 +1,9 @@
 package kozakiewicz.szymon.dragtimer;
 
+import com.github.mikephil.charting.charts.BarLineChartBase;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+
 public class Utils {
     /**
      * @param timeInterval milisecounds
@@ -29,4 +33,5 @@ public class Utils {
         long result= remanigTime/(1000*60);
         return result;
     }
+
 }
