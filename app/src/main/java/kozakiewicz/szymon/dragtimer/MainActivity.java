@@ -163,6 +163,8 @@ public class MainActivity extends AppCompatActivity {
         {
             editor.putString("currentDay",currentDayOfTheWeek);
             editor.putInt(currentDayOfTheWeek,0);
+
+            editor.commit();
         }
         //update drugs number
         int numberOfDrugsToday=sharedPref.getInt(currentDayOfTheWeek,0);
