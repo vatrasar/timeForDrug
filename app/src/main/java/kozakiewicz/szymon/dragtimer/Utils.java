@@ -13,7 +13,7 @@ public class Utils {
      */
     public static boolean isAfterTimeForDrag(long timeInterval,long currentTime,long lastDragTime)
     {
-        timeInterval=60*60*1000*timeInterval;
+        timeInterval=timeInterval;
         if(timeInterval<(currentTime-lastDragTime))
             return true;
         else
@@ -24,14 +24,24 @@ public class Utils {
      * @param timeInterval milisecounds
      * @param currentTime milisecounds
      * @param lastDragTime hours
-     * @return remaning time in minutes
+     * @return remaning time in milisecounds
      */
     public static long getRemaingTime(long timeInterval,long currentTime,long lastDragTime)
     {
-        timeInterval=timeInterval*60*60*1000;
+
         long remanigTime=timeInterval-(currentTime-lastDragTime);
-        long result= remanigTime/(1000*60);
-        return result;
+
+        return remanigTime;
+    }
+
+    public static long milisecondsToMinutes(long interval)
+    {
+        return interval/(1000*60);
+    }
+
+    public static long milisecondsToSecounds(long interval)
+    {
+        return interval/(1000);
     }
 
 }

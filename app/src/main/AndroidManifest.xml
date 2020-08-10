@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".StacActivity"></activity>
-        <activity android:name=".SettingsActivity" />
+        <activity android:name=".SettingsActivity" android:label="@string/settings" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

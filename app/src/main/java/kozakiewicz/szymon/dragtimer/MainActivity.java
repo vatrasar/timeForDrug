@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
             long lastDragTime = 1;
             lastDragTime = sharedPref.getLong("lastDragTime", lastDragTime);
-            int timeInterval = 1;
-            timeInterval = sharedPref.getInt("hoursNumber", timeInterval);
+            long timeInterval = 1;
+            timeInterval = sharedPref.getLong("timeInterval", timeInterval);
 
 
             //set Time in timeView
@@ -78,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setProgrss(long lastDragTime, int timeInterval) {
+    private void setProgrss(long lastDragTime, long timeInterval) {
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.timeProgressbar);;
-        progressBar.setMax(timeInterval*60);
-        int progress=timeInterval*60-(int) Utils.getRemaingTime(timeInterval, Calendar.getInstance().getTimeInMillis(),lastDragTime);
+        progressBar.setMax((int)Utils.milisecondsToSecounds(timeInterval));
+        int progress=(int)Utils.milisecondsToSecounds(timeInterval)-(int)Utils.milisecondsToSecounds( Utils.getRemaingTime(timeInterval, Calendar.getInstance().getTimeInMillis(),lastDragTime));
         progressBar.setProgress(progress);
         progressBar.setVisibility(View.VISIBLE);
     }
@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean isDragTime() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-        int timeInterval=1;
-        timeInterval=sharedPref.getInt("hoursNumber",timeInterval);
+        long timeInterval=1;
+        timeInterval=sharedPref.getLong("timeInterval",timeInterval);
 
         long lastDragTime=1;
         lastDragTime=sharedPref.getLong("lastDragTime",lastDragTime);
@@ -122,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
 
         //get data
         long lastTime=Calendar.getInstance().getTimeInMillis();
-        int timeInterval=1;
-        timeInterval=sharedPref.getInt("hoursNumber",timeInterval);
+        long timeInterval=1;
+        timeInterval=sharedPref.getLong("timeInterval",timeInterval);
 
         //new lastDragTime
         long lastDragTime=Calendar.getInstance().getTimeInMillis();
@@ -136,16 +136,19 @@ public class MainActivity extends AppCompatActivity {
         //set labRemaningtime:
         TextView labRemainingTime=((TextView) findViewById(R.id.labTime));
         labRemainingTime.setTextColor(Color.BLUE);
-        labRemainingTime.setText(timeInterval*60+"");
+        labRemainingTime.setText(Utils.milisecondsToMinutes(timeInterval)+"");
 
         //run thread
         timerHandler.removeCallbacks(timerRunnable);
         timerRunnable=new MyTime((TextView) findViewById(R.id.labTime),(TextView) findViewById(R.id.txtRemainigTime),timerHandler,lastTime,timeInterval,(Button)findViewById(R.id.btnTakeDrag),(ProgressBar) findViewById(R.id.timeProgressbar));
-        timerHandler.postDelayed(timerRunnable, 60000);
+        timerHandler.postDelayed(timerRunnable, 5000);
 
         //set notify service
         Intent intent = new Intent(this, AlarmService.class);
         startService(intent);
+
+
+        //set progress
         setProgrss(lastDragTime,timeInterval);
 
 
@@ -165,6 +168,8 @@ public class MainActivity extends AppCompatActivity {
         int numberOfDrugsToday=sharedPref.getInt(currentDayOfTheWeek,0);
         editor.putInt(currentDayOfTheWeek,numberOfDrugsToday+1);
         editor.commit();
+
+
 
 
     }
@@ -195,7 +200,7 @@ class MyTime extends Thread
     ProgressBar progressBar;
 
 
-    public MyTime(TextView labTime, TextView labInfoLab, Handler timerHandler, long lastTime, int timeInterval, Button takeDragButton,ProgressBar progressBar) {
+    public MyTime(TextView labTime, TextView labInfoLab, Handler timerHandler, long lastTime,long timeInterval, Button takeDragButton,ProgressBar progressBar) {
         this.labTime = labTime;
         this.timerHandler = timerHandler;
         this.timeInterval=timeInterval;
@@ -224,10 +229,10 @@ class MyTime extends Thread
         else {
 
 
-            labTime.setText(Utils.getRemaingTime(timeInterval,Calendar.getInstance().getTimeInMillis(),lastTime) + "");
+            labTime.setText(Utils.milisecondsToMinutes(Utils.getRemaingTime(timeInterval,Calendar.getInstance().getTimeInMillis(),lastTime)) + "");
 
-            timerHandler.postDelayed(this, 60000);
-            int progress=(int)timeInterval*60-(int)Utils.getRemaingTime(timeInterval,Calendar.getInstance().getTimeInMillis(),lastTime);
+            timerHandler.postDelayed(this, 5000);
+            int progress=(int)Utils.milisecondsToSecounds(timeInterval)-(int)Utils.milisecondsToSecounds(Utils.getRemaingTime(timeInterval,Calendar.getInstance().getTimeInMillis(),lastTime));
 
             progressBar.setProgress(progress);
 

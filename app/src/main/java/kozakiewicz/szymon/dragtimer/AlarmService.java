@@ -18,13 +18,16 @@ import java.util.Calendar;
 
 public class AlarmService extends Service
 {
+
+
     public NotifyManager notificationManager=new NotifyManager();
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 
 
-        notificationManager.setAlarm(this, getRemaningTime());
+       notificationManager.setAlarm(this, getRemaningTime());
 
         return START_STICKY;
     }
@@ -52,12 +55,13 @@ public class AlarmService extends Service
     {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-        int timeInterval=1;
-        timeInterval=sharedPref.getInt("hoursNumber",timeInterval);
+        long timeInterval=60000;
+        timeInterval=sharedPref.getLong("timeInterval",timeInterval);
 
         long lastDragTime=1;
         lastDragTime=sharedPref.getLong("lastDragTime",lastDragTime);
-        long currentTime= Calendar.getInstance().getTimeInMillis();
-        return Utils.getRemaingTime(timeInterval,currentTime,lastDragTime);
+
+        long nowTime=Calendar.getInstance().getTimeInMillis();
+        return lastDragTime+timeInterval;
     }
 }
