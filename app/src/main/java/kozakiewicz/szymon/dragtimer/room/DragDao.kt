@@ -18,6 +18,7 @@ interface DragDao {
     @Query("SELECT * FROM Drag")
     fun getAllDrags():LiveData<List<Drug>>
 
-
+    @Query("SELECT * FROM Drag")
+    fun getAllDragsList():List<Drug>
 
 }

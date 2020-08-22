@@ -1,5 +1,6 @@
 package kozakiewicz.szymon.dragtimer
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -11,8 +12,17 @@ import java.util.*
 
 class AddNewDrugActivity : AppCompatActivity() {
     lateinit var drugsViewModel: DrugsViewModel
+    var isUpade:Boolean=false
+    var position:Int=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var myIntent:Intent = getIntent();
+        isUpade=myIntent.getBooleanExtra("isUpdate",false)
+        if(isUpade)
+        {
+            position=myIntent.getIntExtra("position",1)
+        }
+
         setContentView(R.layout.activity_add_new_drug)
         drugsViewModel= ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(DrugsViewModel::class.java)
     }

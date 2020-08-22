@@ -27,4 +27,10 @@ class DragRepository(aplication:Application){
             dragDao.getAllDrags()
         }
     }
+    fun getAllDragsList(): Deferred<List<Drug>>
+    {
+        return CoroutineScope(Dispatchers.IO).async {
+            dragDao.getAllDragsList()
+        }
+    }
 }

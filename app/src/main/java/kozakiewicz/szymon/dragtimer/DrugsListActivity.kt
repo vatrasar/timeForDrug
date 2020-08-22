@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -12,12 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kozakiewicz.szymon.dragtimer.adapters.AdapterDrugList
-import kozakiewicz.szymon.dragtimer.adapters.TakeDrugClickListener
+import kozakiewicz.szymon.dragtimer.adapters.ClickListener
 import kozakiewicz.szymon.dragtimer.room.Drug
 import kozakiewicz.szymon.dragtimer.viewModels.DrugsViewModel
 import java.util.*
-import java.util.concurrent.Executors
-import kotlin.concurrent.schedule
 
 class DrugsListActivity : AppCompatActivity() {
     lateinit var drugsViewModel:DrugsViewModel
@@ -40,8 +37,8 @@ class DrugsListActivity : AppCompatActivity() {
 
         listOfDrugs.observe(this, Observer {
             if (it.isNotEmpty()) {
-                val onTakeDrugListener = object : TakeDrugClickListener {
-                    override fun onClick(view: View?, position: Int) {
+                val onTakeDrugListener = object : ClickListener {
+                    override fun onClick(view: View?, position: Int,activity: AppCompatActivity?) {
 
                         var drugList: List<Drug>? = drugsViewModel.getAllDragsList().value
                         drugList!![position].dragTime = Calendar.getInstance().timeInMillis
@@ -49,9 +46,20 @@ class DrugsListActivity : AppCompatActivity() {
                     }
                 }
 
-                drugListAdapter = AdapterDrugList(it, onTakeDrugListener)
+                val showDetailsListener = object : ClickListener {
+                    override fun onClick(view: View?, position: Int,activity: AppCompatActivity?) {
+
+
+                        val intent = Intent(activity, DetailsActivity::class.java)
+                        intent.putExtra("position",position)
+
+                        startActivity(intent)
+                    }
+                }
+
+                drugListAdapter = AdapterDrugList(it, onTakeDrugListener,showDetailsListener,this)
                 recyclerView.adapter = drugListAdapter
-                Timer().schedule(MyProgressTimer(drugListAdapter,this), INTERFACE_UPDATE_DELAY)
+                Timer().schedule(MyProgressTimer(drugListAdapter, this), INTERFACE_UPDATE_DELAY)
             }
         })
 
