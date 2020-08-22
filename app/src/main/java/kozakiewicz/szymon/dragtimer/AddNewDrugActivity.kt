@@ -7,6 +7,7 @@ import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import kozakiewicz.szymon.dragtimer.room.Drug
 import kozakiewicz.szymon.dragtimer.viewModels.DrugsViewModel
+import java.util.*
 
 class AddNewDrugActivity : AppCompatActivity() {
     lateinit var drugsViewModel: DrugsViewModel
@@ -19,7 +20,7 @@ class AddNewDrugActivity : AppCompatActivity() {
     fun onAddNewDrug(view: View) {
         var txtNewDrugName:EditText=findViewById<EditText>(R.id.txtNewDrugName)
         var newDrugName:String=txtNewDrugName.text.toString()
-        drugsViewModel.insertNewDrug(Drug(newDrugName,1,1))
+        drugsViewModel.insertNewDrug(Drug(newDrugName,60*1000,Calendar.getInstance().timeInMillis))
 
     }
 }

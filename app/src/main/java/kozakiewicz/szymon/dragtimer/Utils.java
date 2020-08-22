@@ -44,4 +44,11 @@ public class Utils {
         return interval/(1000);
     }
 
+    public static long getProgressTime(long timeInterval,long currentTime,long lastDragTime) {
+        long progressTime=(currentTime-lastDragTime);
+        if(timeInterval<progressTime)
+            return timeInterval;
+
+        return progressTime;
+    }
 }

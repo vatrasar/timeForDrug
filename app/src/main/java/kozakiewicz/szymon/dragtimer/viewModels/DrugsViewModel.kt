@@ -1,6 +1,7 @@
 package kozakiewicz.szymon.dragtimer.viewModels
 
 import android.app.Application
+import android.os.CountDownTimer
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
@@ -18,10 +19,19 @@ class DrugsViewModel(application: Application):AndroidViewModel(application)
         allDragsList.await()
 
     }
+//    fun refreshModel()
+//    {
+//        allDragsList.await()
+//    }
 
     fun insertNewDrug(newDrug:Drug)
     {
         dragsRepository.insert(newDrug)
     }
+
+    fun updateDrug(drugTuUpdate: Drug) {
+        dragsRepository.update(drugTuUpdate)
+    }
+
 
 }
