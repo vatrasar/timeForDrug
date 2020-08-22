@@ -31,6 +31,19 @@ class AdapterDrugList(private val listOfDrugs: List<Drug>,private val myListener
         var progressValue=(Utils.milisecondsToSecounds(Utils.getProgressTime(listOfDrugs[position].timeInterval,Calendar.getInstance().timeInMillis,listOfDrugs[position].dragTime))).toInt()
         prograss.progress=(Utils.milisecondsToSecounds(Utils.getProgressTime(listOfDrugs[position].timeInterval,Calendar.getInstance().timeInMillis,listOfDrugs[position].dragTime))).toInt()
         labDragName.text=listOfDrugs[position].name
+
+        //set btn status
+        val button:Button=holder.view.findViewById(R.id.btnTakeDrug)
+        if(Utils.isAfterTimeForDrag(listOfDrugs[position].timeInterval,Calendar.getInstance().timeInMillis,listOfDrugs[position].dragTime))
+        {
+
+            button.isEnabled=true
+        }
+        else
+        {
+            button.isEnabled=false
+        }
+
     }
 
 }
