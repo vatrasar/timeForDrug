@@ -62,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.labTime)).setTextColor(Color.BLUE);
             //run thread
             timerHandler.removeCallbacks(timerRunnable);
-            timerRunnable = new MyTime((TextView) findViewById(R.id.labTime), (TextView) findViewById(R.id.txtRemainigTime), timerHandler, lastDragTime, timeInterval, (Button) findViewById(R.id.btnTakeDrag),progressBar);
+            timerRunnable = new MyTime((TextView) findViewById(R.id.labTime), (TextView) findViewById(R.id.txtRemainigTime), timerHandler, lastDragTime, timeInterval,progressBar);
             timerHandler.postDelayed(timerRunnable, 1000);
 
             //disable onDragTime
-            Button onDragTime = ((Button) findViewById(R.id.btnTakeDrag));
+            Button onDragTime = ((Button) findViewById(R.id.btnTakeDrug));
             onDragTime.setEnabled(false);
 
             //set progrss
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         labTime.setText(R.string.timeForDrag);
         labTime.setTextColor(Color.GREEN);
         ((TextView) findViewById(R.id.txtRemainigTime)).setText("");
-        ((Button)findViewById(R.id.btnTakeDrag)).setEnabled(true);
+
     }
 
     private boolean isDragTime() {
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onTakeDrag(View view) {
-        ((Button)findViewById(R.id.btnTakeDrag)).setEnabled(false);
+
 
         //get Shared Preferences instance
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
         //run thread
         timerHandler.removeCallbacks(timerRunnable);
-        timerRunnable=new MyTime((TextView) findViewById(R.id.labTime),(TextView) findViewById(R.id.txtRemainigTime),timerHandler,lastTime,timeInterval,(Button)findViewById(R.id.btnTakeDrag),(ProgressBar) findViewById(R.id.timeProgressbar));
+        timerRunnable=new MyTime((TextView) findViewById(R.id.labTime),(TextView) findViewById(R.id.txtRemainigTime),timerHandler,lastTime,timeInterval,(ProgressBar) findViewById(R.id.timeProgressbar));
         timerHandler.postDelayed(timerRunnable, 5000);
 
         //set notify service
@@ -202,13 +202,13 @@ class MyTime extends Thread
     ProgressBar progressBar;
 
 
-    public MyTime(TextView labTime, TextView labInfoLab, Handler timerHandler, long lastTime,long timeInterval, Button takeDragButton,ProgressBar progressBar) {
+    public MyTime(TextView labTime, TextView labInfoLab, Handler timerHandler, long lastTime,long timeInterval,ProgressBar progressBar) {
         this.labTime = labTime;
         this.timerHandler = timerHandler;
         this.timeInterval=timeInterval;
         this.lastTime=lastTime;
         this.labInfoLab=labInfoLab;
-        this.takeDragButton=takeDragButton;
+
         this.progressBar=progressBar;
 
     }

@@ -1,9 +1,9 @@
 package kozakiewicz.szymon.dragtimer
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import kozakiewicz.szymon.dragtimer.room.Drug
 import kozakiewicz.szymon.dragtimer.viewModels.DrugsViewModel
@@ -19,8 +19,19 @@ class AddNewDrugActivity : AppCompatActivity() {
 
     fun onAddNewDrug(view: View) {
         var txtNewDrugName:EditText=findViewById<EditText>(R.id.txtNewDrugName)
-        var newDrugName:String=txtNewDrugName.text.toString()
-        drugsViewModel.insertNewDrug(Drug(newDrugName,60*1000,Calendar.getInstance().timeInMillis))
+        //time interval
+        var txtSecound:EditText=findViewById<EditText>(R.id.txtSecound)
+        var txtMinutes:EditText=findViewById<EditText>(R.id.txtMinute)
+        var txtHours:EditText=findViewById<EditText>(R.id.txtHour)
 
+        val hoursNumber: Int = txtHours.getText().toString().toInt()
+        val minutesNumber: Int = txtMinutes.getText().toString().toInt()
+        val secoundsNumber: Int = txtSecound.getText().toString().toInt()
+        val timeInterval:Long = (1000 * (minutesNumber * 60 + hoursNumber * 60 * 60 + secoundsNumber)).toLong()
+
+        var newDrugName:String=txtNewDrugName.text.toString()
+
+        drugsViewModel.insertNewDrug(Drug(newDrugName, timeInterval, Calendar.getInstance().timeInMillis - timeInterval))
+        finish()
     }
 }

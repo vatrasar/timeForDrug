@@ -11,6 +11,11 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="myFormStyle">
+
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

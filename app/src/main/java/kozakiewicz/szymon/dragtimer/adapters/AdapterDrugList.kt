@@ -1,11 +1,13 @@
 package kozakiewicz.szymon.dragtimer.adapters
 
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kozakiewicz.szymon.dragtimer.R
 import kozakiewicz.szymon.dragtimer.Utils
@@ -38,6 +40,8 @@ class AdapterDrugList(private val listOfDrugs: List<Drug>,private val myListener
         {
 
             button.isEnabled=true
+
+
         }
         else
         {

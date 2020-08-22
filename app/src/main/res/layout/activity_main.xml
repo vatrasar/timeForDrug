@@ -18,17 +18,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnTakeDrag"
-        android:layout_width="163dp"
-        android:layout_height="57dp"
-        android:onClick="onTakeDrag"
-        android:text="@string/take_drag"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/btnReset"
         android:layout_width="121dip"
         android:layout_height="46dip"
@@ -42,11 +31,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btnTakeDrag"
+        app:layout_constraintBottom_toTopOf="@+id/btnStac"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65999997">
+        app:layout_constraintVertical_bias="0.32999998">
 
         <LinearLayout
             android:layout_width="wrap_content"
