@@ -69,7 +69,11 @@ class DrugsListActivity : AppCompatActivity() {
 
     fun onInsertNewDrug(view: View) {
         val intent = Intent(this, AddNewDrugActivity::class.java)
+
+        intent.putExtra("isUpdate",false)
         startActivity(intent)
 
     }
+
+
 }

@@ -98,7 +98,9 @@ class DetailsActivity : AppCompatActivity() {
         }
 
     fun onSettings(view: View?) {
-        val intent = Intent(this, SettingsActivity::class.java)
+        val intent = Intent(this, AddNewDrugActivity::class.java)
+        intent.putExtra("position",position)
+        intent.putExtra("isUpdate",true)
         startActivity(intent)
     }
 
@@ -160,16 +162,14 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     fun onReset(view: View?) {
-        var drugList: List<Drug>?=null
-        var result=dragsRepository.getAllDragsList()
 
-        runBlocking {
-            drugList=result.await()
-        }
+        var drugList=dragsRepository.getAllDragsList()
 
 
 
-        val drugToUpadte = drugList!![position]
+
+
+        val drugToUpadte = drugList[position]
         drugToUpadte.dragTime = Calendar.getInstance().timeInMillis - drugToUpadte.timeInterval
         dragsRepository.update(drugToUpadte)
 

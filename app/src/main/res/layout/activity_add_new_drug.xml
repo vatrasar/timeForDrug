@@ -27,10 +27,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:width="10dip"
                     android:text="@string/name" />
 
                 <EditText
-                    android:id="@+id/txtNewDrugName"
+                    android:id="@+id/txtNewDrugNam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -56,6 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:width="10dip"
                     android:text="@string/hour" />
 
                 <EditText
@@ -64,7 +66,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="numberSigned" />
+                    android:inputType="numberSigned"
+                    android:text="3" />
             </LinearLayout>
 
             <LinearLayout
@@ -78,6 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:width="10dip"
                     android:text="@string/minutes" />
 
                 <EditText
@@ -86,7 +90,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="numberSigned" />
+                    android:inputType="numberSigned"
+                    android:text="0" />
             </LinearLayout>
 
             <LinearLayout
@@ -100,6 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:width="10dip"
                     android:text="@string/seconds" />
 
                 <EditText
@@ -108,7 +114,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="numberSigned" />
+                    android:inputType="numberSigned"
+                    android:text="0" />
             </LinearLayout>
 
         </LinearLayout>

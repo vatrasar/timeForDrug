@@ -27,10 +27,15 @@ class DragRepository(aplication:Application){
             dragDao.getAllDrags()
         }
     }
-    fun getAllDragsList(): Deferred<List<Drug>>
+    fun getAllDragsList(): List<Drug>
     {
-        return CoroutineScope(Dispatchers.IO).async {
+        var result:List<Drug>
+        return  runBlocking {
+            result=CoroutineScope(Dispatchers.IO).async {
             dragDao.getAllDragsList()
+        }.await()
+            return@runBlocking result
         }
+
     }
 }

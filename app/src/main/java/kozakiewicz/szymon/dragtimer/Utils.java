@@ -51,4 +51,7 @@ public class Utils {
 
         return progressTime;
     }
+    public static Long getTimeInterval(int minutesNumber, int hoursNumber,int secoundsNumber) {
+        return (long) (1000 * (minutesNumber * 60 + hoursNumber * 60 * 60 + secoundsNumber));
+    }
 }
