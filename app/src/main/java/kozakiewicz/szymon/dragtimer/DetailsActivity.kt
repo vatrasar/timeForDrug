@@ -42,26 +42,23 @@ class DetailsActivity : AppCompatActivity() {
             setDragTimeLook()
         } else {
             //get data
-            val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
-            var lastDragTime: Long = 1
-            lastDragTime = sharedPref.getLong("lastDragTime", lastDragTime)
-            var timeInterval: Long = 1
-            timeInterval = sharedPref.getLong("timeInterval", timeInterval)
+            var drugList=drugsRepository.getAllDragsList()
+            val drug = drugList[position]
+
+            var timeInterval: Long = drug.timeInterval
+
+            var lastDragTime: Long = drug.dragTime
 
 
             //set Time in timeView
             (findViewById<View>(R.id.txtRemainigTime) as TextView).setText(R.string.remaining_time)
 
             //set color:
-            (findViewById<View>(R.id.labTime) as TextView).setTextColor(Color.BLUE)
-            //run thread
-            timerHandler.removeCallbacks(timerRunnable!!)
-            timerRunnable = MyTime(findViewById<View>(R.id.labTime) as TextView, findViewById<View>(R.id.txtRemainigTime) as TextView, timerHandler, lastDragTime, timeInterval, progressBar)
-            timerHandler.postDelayed(timerRunnable!!, 1000)
+            var labInfo=(findViewById<View>(R.id.labTime) as TextView)
+            labInfo.setTextColor(Color.BLUE)
+            labInfo.setText(Utils.milisecondsToMinutes(Utils.getRemaingTime(timeInterval,Calendar.getInstance().timeInMillis,lastDragTime)).toString())
 
-            //disable onDragTime
-            val onDragTime = findViewById<View>(R.id.btnTakeDrug) as Button
-            onDragTime.isEnabled = false
+
 
             //set progrss
             setProgrss(lastDragTime, timeInterval)
@@ -79,17 +76,20 @@ class DetailsActivity : AppCompatActivity() {
     private fun setDragTimeLook() {
         val labTime = findViewById<View>(R.id.labTime) as TextView
         labTime.setText(R.string.timeForDrag)
-        labTime.setTextColor(Color.GREEN)
+        labTime.setTextColor(Color.MAGENTA)
         (findViewById<View>(R.id.txtRemainigTime) as TextView).text = ""
     }
 
     private val isDragTime: Boolean
         private get() {
-            val sharedPref = PreferenceManager.getDefaultSharedPreferences(this)
-            var timeInterval: Long = 1
-            timeInterval = sharedPref.getLong("timeInterval", timeInterval)
-            var lastDragTime: Long = 1
-            lastDragTime = sharedPref.getLong("lastDragTime", lastDragTime)
+
+            var drugList=drugsRepository.getAllDragsList()
+            val drug = drugList[position]
+
+            var timeInterval: Long = drug.timeInterval
+
+            var lastDragTime: Long = drug.dragTime
+
             val currentTime = Calendar.getInstance().timeInMillis
             return Utils.isAfterTimeForDrag(timeInterval, currentTime, lastDragTime)
         }

@@ -1,5 +1,8 @@
 package kozakiewicz.szymon.dragtimer.adapters
 
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +17,12 @@ import kozakiewicz.szymon.dragtimer.Utils
 import kozakiewicz.szymon.dragtimer.room.Drug
 import java.util.*
 
-class AdapterDrugList(private val listOfDrugs: List<Drug>, private val btnTakeDrugListener: ClickListener, private val btnShowDetailsListener: ClickListener,private val drugsListActivity: DrugsListActivity) :RecyclerView.Adapter<DrugRowViewHolder>(){
+
+class AdapterDrugList(private val listOfDrugs: List<Drug>, private val btnTakeDrugListener: ClickListener, private val btnShowDetailsListener: ClickListener, private val drugsListActivity: DrugsListActivity) :RecyclerView.Adapter<DrugRowViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrugRowViewHolder {
         val layoutInflater:LayoutInflater= LayoutInflater.from(parent.context)
         val dragRow:View=layoutInflater.inflate(R.layout.drug_row, parent, false)
-        return DrugRowViewHolder(dragRow,btnTakeDrugListener,btnShowDetailsListener,drugsListActivity)
+        return DrugRowViewHolder(dragRow, btnTakeDrugListener, btnShowDetailsListener, drugsListActivity)
     }
 
     override fun getItemCount(): Int {
@@ -28,18 +32,21 @@ class AdapterDrugList(private val listOfDrugs: List<Drug>, private val btnTakeDr
 
     override fun onBindViewHolder(holder: DrugRowViewHolder, position: Int) {
         var labDragName:TextView=holder.view.findViewById<TextView>(R.id.labDragName)
-        var prograss:ProgressBar=holder.view.findViewById<ProgressBar>(R.id.dragProgress)
-        prograss.max=(Utils.milisecondsToSecounds(listOfDrugs[position].timeInterval)).toInt()
-        var progressValue=(Utils.milisecondsToSecounds(Utils.getProgressTime(listOfDrugs[position].timeInterval,Calendar.getInstance().timeInMillis,listOfDrugs[position].dragTime))).toInt()
-        prograss.progress=(Utils.milisecondsToSecounds(Utils.getProgressTime(listOfDrugs[position].timeInterval,Calendar.getInstance().timeInMillis,listOfDrugs[position].dragTime))).toInt()
+        var progress:ProgressBar=holder.view.findViewById<ProgressBar>(R.id.dragProgress)
+        progress.max=(Utils.milisecondsToSecounds(listOfDrugs[position].timeInterval)).toInt()
+        var progressValue=(Utils.milisecondsToSecounds(Utils.getProgressTime(listOfDrugs[position].timeInterval, Calendar.getInstance().timeInMillis, listOfDrugs[position].dragTime))).toInt()
+        progress.progress=(Utils.milisecondsToSecounds(Utils.getProgressTime(listOfDrugs[position].timeInterval, Calendar.getInstance().timeInMillis, listOfDrugs[position].dragTime))).toInt()
         labDragName.text=listOfDrugs[position].name
 
         //set btn status
         val button:Button=holder.view.findViewById(R.id.btnTakeDrug)
-        if(Utils.isAfterTimeForDrag(listOfDrugs[position].timeInterval,Calendar.getInstance().timeInMillis,listOfDrugs[position].dragTime))
+        if(Utils.isAfterTimeForDrag(listOfDrugs[position].timeInterval, Calendar.getInstance().timeInMillis, listOfDrugs[position].dragTime))
         {
 
             button.isEnabled=true
+            val progressDrawable: Drawable = progress.getProgressDrawable().mutate()
+            progressDrawable.setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN)
+            progress.setProgressDrawable(progressDrawable)
 
 
         }
@@ -53,7 +60,7 @@ class AdapterDrugList(private val listOfDrugs: List<Drug>, private val btnTakeDr
 }
 
 
-class DrugRowViewHolder(val view: View, private val btnTakeDrugListener: ClickListener, btnShowDetailsListener: ClickListener,private val  drugsListActivity: DrugsListActivity): RecyclerView.ViewHolder(view), View.OnClickListener
+class DrugRowViewHolder(val view: View, private val btnTakeDrugListener: ClickListener, btnShowDetailsListener: ClickListener, private val drugsListActivity: DrugsListActivity): RecyclerView.ViewHolder(view), View.OnClickListener
 {
 
   init {
@@ -61,16 +68,16 @@ class DrugRowViewHolder(val view: View, private val btnTakeDrugListener: ClickLi
       var btnAddDrug:Button=view.findViewById<Button>(R.id.btnTakeDrug)
       var btnDetails:Button=view.findViewById<Button>(R.id.btnDetails)
       btnAddDrug.setOnClickListener(this)
-      btnDetails.setOnClickListener { btnShowDetailsListener.onClick(view,adapterPosition,drugsListActivity) }
+      btnDetails.setOnClickListener { btnShowDetailsListener.onClick(view, adapterPosition, drugsListActivity) }
 
   }
     override fun onClick(p0: View?) {
-        btnTakeDrugListener.onClick(view,adapterPosition,drugsListActivity)
+        btnTakeDrugListener.onClick(view, adapterPosition, drugsListActivity)
     }
 
 }
 
 
 interface ClickListener {
-    fun onClick(view: View?, position: Int,activity: AppCompatActivity? =null)
+    fun onClick(view: View?, position: Int, activity: AppCompatActivity? = null)
 }
