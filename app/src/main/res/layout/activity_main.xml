@@ -7,35 +7,15 @@
     android:layout_alignParentBottom="true"
     tools:context=".DetailsActivity">
 
-    <Button
-        android:id="@+id/btnSettings"
-        android:layout_width="120dip"
-        android:layout_height="46dip"
-        android:backgroundTint="#CDDC39"
-        android:onClick="onSettings"
-        android:text="@string/settings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnReset"
-        android:layout_width="121dip"
-        android:layout_height="46dip"
-        android:backgroundTint="#E91E63"
-        android:onClick="onReset"
-        android:text="@string/reset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btnStac"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32999998">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -67,15 +47,50 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnStac"
-        android:layout_width="121dip"
-        android:layout_height="46dip"
-        android:backgroundTint="#4EADD8"
-        android:onClick="onStac"
-        android:text="@string/statistic"
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnReset"
-        app:layout_constraintStart_toEndOf="@+id/btnSettings" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btnStac"
+            android:layout_width="@dimen/btnDetailsWidth"
+            android:layout_height="46dip"
+            android:backgroundTint="#4EADD8"
+            android:onClick="onStac"
+            android:text="@string/statistic" />
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="@dimen/btnDetailsWidth"
+            android:layout_height="46dip"
+            android:layout_marginTop="@dimen/btnDetailsMargins"
+            android:backgroundTint="#65C151"
+            android:onClick="onReset"
+            android:text="@string/reset" />
+
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="@dimen/btnDetailsWidth"
+            android:layout_height="46dip"
+            android:layout_marginTop="@dimen/btnDetailsMargins"
+            android:backgroundTint="#CDDC39"
+            android:onClick="onSettings"
+            android:text="@string/settings" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="@dimen/btnDetailsWidth"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/btnDetailsMargins"
+            android:backgroundTint="#E91E63"
+            android:onClick="onDeleteDrug"
+            android:text="@string/DeleteDrug" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

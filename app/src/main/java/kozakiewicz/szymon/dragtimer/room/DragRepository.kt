@@ -38,4 +38,10 @@ class DragRepository(aplication:Application){
         }
 
     }
+
+    fun deleteDrug(drug:Drug)=CoroutineScope(Dispatchers.IO).launch {
+        dragDao.delete(drug)
+
+
+    }
 }

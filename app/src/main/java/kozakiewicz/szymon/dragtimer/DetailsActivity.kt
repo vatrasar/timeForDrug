@@ -10,11 +10,8 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.coroutines.runBlocking
 import kozakiewicz.szymon.dragtimer.room.DragRepository
-import kozakiewicz.szymon.dragtimer.room.Drug
 import kozakiewicz.szymon.dragtimer.viewModels.DrugsViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -27,13 +24,13 @@ class DetailsActivity : AppCompatActivity() {
     var position = 0
     var timerRunnable: MyTime? = null
     var drugsViewModel: DrugsViewModel? = null
-    lateinit  var dragsRepository:DragRepository
+    lateinit  var drugsRepository:DragRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val myIntent = intent
         position = myIntent.getIntExtra("position", 1)
-        dragsRepository=DragRepository(application)
+        drugsRepository=DragRepository(application)
         drugsViewModel=ViewModelProvider.AndroidViewModelFactory.getInstance(application).create(DrugsViewModel::class.java)
 
         counter = 0
@@ -163,7 +160,7 @@ class DetailsActivity : AppCompatActivity() {
 
     fun onReset(view: View?) {
 
-        var drugList=dragsRepository.getAllDragsList()
+        var drugList=drugsRepository.getAllDragsList()
 
 
 
@@ -171,7 +168,7 @@ class DetailsActivity : AppCompatActivity() {
 
         val drugToUpadte = drugList[position]
         drugToUpadte.dragTime = Calendar.getInstance().timeInMillis - drugToUpadte.timeInterval
-        dragsRepository.update(drugToUpadte)
+        drugsRepository.update(drugToUpadte)
 
 
 
@@ -180,6 +177,13 @@ class DetailsActivity : AppCompatActivity() {
     fun onStac(view: View?) {
         val intent = Intent(this, StacActivity::class.java)
         startActivity(intent)
+    }
+
+    fun onDeleteDrug(view: View) {
+        var drugsList=drugsRepository.getAllDragsList()
+        drugsRepository.deleteDrug(drugsList[position])
+        finish()
+
     }
 }
 

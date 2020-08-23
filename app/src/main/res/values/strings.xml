@@ -25,4 +25,5 @@
     <string name="name">nazwa</string>
     <string name="add">dodaj</string>
     <string name="edit">Edytuj</string>
+    <string name="DeleteDrug">Usuń lek</string>
 </resources>
