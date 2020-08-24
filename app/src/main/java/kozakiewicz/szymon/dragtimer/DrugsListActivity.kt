@@ -43,6 +43,8 @@ class DrugsListActivity : AppCompatActivity() {
                         var drugList: List<Drug>? = drugsViewModel.getAllDragsList().value
                         drugList!![position].dragTime = Calendar.getInstance().timeInMillis
                         drugsViewModel.updateDrug(drugList[position])
+                        drugsViewModel.insertStat(drugList[position])
+
                     }
                 }
 

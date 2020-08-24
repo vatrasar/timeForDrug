@@ -3,6 +3,7 @@ package kozakiewicz.szymon.dragtimer.room
 import android.app.Application
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.*
+import java.util.*
 
 class DragRepository(aplication:Application){
     private var dragDao:DragDao
@@ -43,5 +44,22 @@ class DragRepository(aplication:Application){
         dragDao.delete(drug)
 
 
+    }
+
+    fun insertTakeDrugStac(drug:Drug)
+            : Job = CoroutineScope(Dispatchers.IO).launch {
+        var takeDrugEvent:TakeDrugEvent= TakeDrugEvent(Calendar.getInstance().timeInMillis,drug.id)
+        dragDao.insertTakeDrugStac(takeDrugEvent)
+
+
+    }
+    fun getStacForDrugAndDay(drug:Drug,startOfDay:Long,endOfDay:Long):List<TakeDrugEvent> {
+        var result: List<TakeDrugEvent>
+        return runBlocking {
+            result = CoroutineScope(Dispatchers.IO).async {
+                dragDao.getStacForDrugAndDay(drug.id,startOfDay,endOfDay)
+            }.await()
+            return@runBlocking result
+        }
     }
 }

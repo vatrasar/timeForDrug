@@ -176,6 +176,7 @@ class DetailsActivity : AppCompatActivity() {
 
     fun onStac(view: View?) {
         val intent = Intent(this, StacActivity::class.java)
+        intent.putExtra("position",position)
         startActivity(intent)
     }
 

@@ -27,11 +27,16 @@ class DrugsViewModel(application: Application):AndroidViewModel(application)
     fun insertNewDrug(newDrug:Drug)
     {
         dragsRepository.insert(newDrug)
+
     }
 
     fun updateDrug(drugTuUpdate: Drug) {
         dragsRepository.update(drugTuUpdate)
     }
 
+    fun insertStat(drug: Drug)
+    {
+        dragsRepository.insertTakeDrugStac(drug)
+    }
 
 }

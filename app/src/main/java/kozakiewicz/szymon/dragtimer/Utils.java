@@ -4,6 +4,8 @@ import com.github.mikephil.charting.charts.BarLineChartBase;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
+import java.util.Calendar;
+
 public class Utils {
     /**
      * @param timeInterval milisecounds
@@ -53,5 +55,15 @@ public class Utils {
     }
     public static Long getTimeInterval(int minutesNumber, int hoursNumber,int secoundsNumber) {
         return (long) (1000 * (minutesNumber * 60 + hoursNumber * 60 * 60 + secoundsNumber));
+    }
+
+    public static Calendar getEndOfDay() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(Calendar.getInstance().getTime());
+        cal.set(Calendar.HOUR_OF_DAY, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+
+        return cal;
     }
 }
