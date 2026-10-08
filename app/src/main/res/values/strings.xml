@@ -1,29 +1,54 @@
 <resources>
-    <string name="app_name">Czas  na lek</string>
-    <string name="settings">Ustawienia</string>
-    <string name="take_drag">Weź lek</string>
-    <string name="remaining_time">Pozostały czas:</string>
-    <string name="intervalSize">Wielkość interwału:</string>
-    <string name="save">Zapisz</string>
-    <string name="hour">godzina</string>
-    <string name="minutes">minuty</string>
-    <string name="seconds">sekundy</string>
-    <string name="settingsPreferences">settingPreferences</string>
-    <string name="timeForDrag">Czas na lek!</string>
-    <string name="reset">Reset</string>
+    <string name="app_name">Czas na lek</string>
+    <string name="nav_tracker">Śledzenie</string>
+    <string name="nav_history">Historia</string>
+    <string name="nav_statistics">Statystyki</string>
     <string name="statistic">Statystyki</string>
-    <string name="title_activity_main2">MainActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+
+    <string name="add_drug">Dodaj lek</string>
+    <string name="edit_drug">Edytuj lek</string>
+    <string name="delete_drug">Usuń lek</string>
+    <string name="save">Zapisz</string>
+    <string name="cancel">Anuluj</string>
+    <string name="take_drug">Weź lek</string>
+    <string name="reset_timer">Resetuj licznik</string>
     <string name="details">Szczegóły</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="name">nazwa</string>
-    <string name="add">dodaj</string>
-    <string name="edit">Edytuj</string>
-    <string name="DeleteDrug">Usuń lek</string>
+    <string name="drug_name">Nazwa leku</string>
+    <string name="interval_size">Wielkość interwału</string>
+    <string name="hours">Godziny</string>
+    <string name="minutes">Minuty</string>
+    <string name="seconds">Sekundy</string>
+    <string name="remaining_time">Pozostały czas</string>
+    <string name="last_dose_time">Ostatnia dawka</string>
+    <string name="status">Status</string>
+
+    <string name="time_for_drug">Czas na lek!</string>
+    <string name="wait_for_next_dose">Odczekaj na lek</string>
+    <string name="never_taken">Jeszcze nie przyjmowano</string>
+    <string name="ready_to_take">Gotowy do przyjęcia</string>
+    <string name="status_ready">Gotowy</string>
+    <string name="status_running">W trakcie</string>
+    <string name="interval_prefix">Interwał: co %1$s</string>
+    <string name="active_drugs_count">Aktywne leki: %1$d</string>
+    <string name="active_drugs_empty">Brak aktywnych leków</string>
+
+    <string name="history_title">Historia dawek</string>
+    <string name="no_history">Brak zarejestrowanych dawek w historii</string>
+    <string name="statistics_title">Statystyki przyjęć</string>
+    <string name="doses_last_7_days">Liczba dawek w ostatnich 7 dniach</string>
+    <string name="all_drugs">Wszystkie leki</string>
+    <string name="no_drugs_found">Brak leków na liście. Kliknij przycisk +, aby dodać pierwszy lek!</string>
+    <string name="delete_confirmation_title">Potwierdzenie usunięcia</string>
+    <string name="delete_confirmation_message">Czy na pewno chcesz usunąć ten lek? Spowoduje to również usunięcie powiązanych wpisów w historii.</string>
+    <string name="confirm_delete">Usuń</string>
+
+    <string name="notification_channel_name">Przypomnienia o lekach</string>
+    <string name="notification_channel_desc">Powiadomienia o konieczności przyjęcia leku po upływie interwału</string>
+    <string name="notification_title">Czas na lek!</string>
+    <string name="notification_content">Czas przyjąć lek: %1$s</string>
+    <string name="drug_taken_snackbar">Zarejestrowano przyjęcie leku %1$s</string>
+    <string name="timer_reset_snackbar">Zresetowano licznik dla leku %1$s</string>
+    <string name="name_required_error">Wpisz nazwę leku</string>
+    <string name="interval_required_error">Wprowadź czas interwału większy od zera</string>
 </resources>

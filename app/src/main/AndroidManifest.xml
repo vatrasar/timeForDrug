@@ -1,49 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kozakiewicz.szymon.dragtimer">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
+        android:name=".DragTimerApp"
         android:allowBackup="true"
         android:icon="@mipmap/app_image"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_image_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".AddNewDrugActivity"></activity>
+        android:theme="@style/Theme.DragTimer">
 
-        <activity android:name=".DrugsListActivity" >
-                        <intent-filter>
-                            <action android:name="android.intent.action.MAIN" />
-
-                            <category android:name="android.intent.category.LAUNCHER" />
-                        </intent-filter>
-        </activity>
-        <activity android:name=".StacActivity" />
         <activity
-            android:name=".SettingsActivity"
-            android:label="@string/settings" />
-        <activity android:name=".DetailsActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.DragTimer">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <receiver
-            android:name=".NotifyManager"
-            android:permission="android.permission.WAKE_LOCK">
-            <intent-filter>
-                <action android:name="android.intent.action.AIRPLANE_MODE" />
-            </intent-filter>
-        </receiver>
+            android:name=".feature.notifications.receiver.MedicationAlarmReceiver"
+            android:exported="false" />
 
-        <service
-            android:name=".AlarmService"
-            android:enabled="true"
-            android:process=":your_service" />
     </application>
 
 </manifest>
